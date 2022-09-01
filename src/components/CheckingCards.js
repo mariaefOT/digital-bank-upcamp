@@ -37,7 +37,7 @@ const CheckingCards = () => {
     const getItems = () => {
         const mappedItems = account.map(item => {
             return (
-                <Col>
+                <Col key={item.accountNumber}>
                     <Card bg="primary" text='light' className="text-start">
                         <Card.Body>
                             <Card.Title>{item.name}</Card.Title>
@@ -56,13 +56,23 @@ const CheckingCards = () => {
         return mappedItems;
     }
 
-    return (
-        <div>
-            <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-                {getItems()}
-            </Row>
-        </div>
-    )
-}
+    if(account.length === 0) {
+        return (
+            <div>
+                <span>
+                    No accounts available
+                </span>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+                    {getItems()}
+                </Row>
+            </div>
+        )
+    };
+};
 
 export default CheckingCards;
