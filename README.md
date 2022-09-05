@@ -32,7 +32,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Built With
 * [React](https://reactjs.org/) - Application Framework
-* [JUnit 5](https://jestjs.io/) - Testing Runner
+* [Jest](https://jestjs.io/) - Testing Runner
 * [React-bootstrap](https://react-bootstrap.github.io/) - CSS framework
 * [Axios](https://axios-http.com/docs/intro) - Promise-based HTTP Client
 * [Redux](https://redux.js.org/) - JavaScript library
