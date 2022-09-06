@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import axios from "axios";
+
+import Cards from "./Cards"
 
 const CheckingCards = () => {
     const [token, setToken] = useState([]);
@@ -38,18 +39,7 @@ const CheckingCards = () => {
         const mappedItems = account.map(item => {
             return (
                 <Col key={item.accountNumber}>
-                    <Card bg="primary" text='light' className="text-start">
-                        <Card.Body>
-                            <Card.Title>{item.name}</Card.Title>
-                            <Card.Text>
-                                Account: {item.accountType.name} <br/>
-                                Ownership: {item.ownershipType.name} <br/>
-                                Account Number: {item.accountNumber} <br/>
-                                Interest Rate: {item.accountType.interestRate}%
-                            </Card.Text>
-                            <Card.Title>Balance: $ {item.currentBalance}</Card.Title>
-                        </Card.Body>
-                    </Card>
+                    <Cards item={item}/>
                 </Col>
             );
         });
