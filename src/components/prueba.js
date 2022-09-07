@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, {useEffect, useState} from 'react';
+import { useState } from 'react';
 
 const Prueba = () => {
-const [token, setToken] = useState([]);
-const [res, setRes] = useState([]);
+const [token, setToken] = useState("");
+const [accounts, setAccounts] = useState([]);
 
-const apiToken = () => {
+const authenticateUser = () => {
     axios.post('http://localhost:8080/bank/api/v1/auth?password=Demo123!&username=jsmith@demo.io', {
 
     })
@@ -17,13 +17,13 @@ const apiToken = () => {
     })
 };
 
-const apiGetAccount = () => {
+const getAccounts = () => {
     axios.get('http://localhost:8080/bank/api/v1/user/account/checking', {
         headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => {
-        setRes(response.data);
-        console.log(res);
+        setAccounts(response.data);
+        console.log(accounts);
     }).catch(error => {
         console.log(error);
     })
@@ -31,8 +31,8 @@ const apiGetAccount = () => {
 
 return (
     <div>
-        <button onClick={ () => apiToken() }>Token</button>
-        <button onClick={ () => apiGetAccount() }>Checking</button>
+        <button onClick={ () => authenticateUser() }>Token</button>
+        <button onClick={ () => getAccounts() }>Checking</button>
         <div>
             <span>{token}</span>
         </div>
