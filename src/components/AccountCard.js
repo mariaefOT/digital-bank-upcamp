@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
 
-const Cards = (props) => {
+const AccountCard = (props) => {
     return (
         <Card bg="primary" text='light' className="text-start">
             <Card.Body>
@@ -17,4 +17,4 @@ const Cards = (props) => {
     )
 }
 
-export default Cards;
+export default AccountCard;
