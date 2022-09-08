@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 
-import Cards from './AccountCard'
+import AccountCard from './AccountCard'
 
 const props = {
     name:'Joint Checking',
@@ -16,11 +16,15 @@ const props = {
     currentBalance: 720
 }
 
-describe('Cards test', () => {
-    it('Render the Cards component with the specified props', () => {
-        const component = render(<Cards item={props}/>);
+describe('AccountCard test', () => {
+    it('Render the AccountCard component with the specified props', () => {
+        const component = render(<AccountCard item={props}/>);
         expect(component).toBeDefined();
 
         component.getByText(props.name); 
+
+        /*const accountName = component.getByText(props.name);
+
+        expect(accountName).toEqual(props.name);*/
     });
 });
