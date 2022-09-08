@@ -1,19 +1,13 @@
 import axios from 'axios';
 
-let response = await axios.post('http://localhost:8080/bank/auth',
-    {},
-    {
-      params: {
-        password: 'Demo123!',
-        username: 'jsmith@demo.io',
-      },
-    }
-  );
+axios.post('http://localhost:8080/bank/api/v1/auth?password=Demo123!&username=jsmith@demo.io', {
+}).then(response => {
+    sessionStorage.setItem('token',response.data.authToken);
+}).catch(error => {
+    console.log(error);
+})
 
-const axiosClient = axios.create({
-    validateStatus: () => true,
+export const axiosClient = axios.create({
     baseURL: 'http://localhost:8080/bank/api/v1',
-    headers: { Authorization: `Bearer ${response.data.authToken}` },
-});
-
-  export default axiosClient;
+    headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
+  });
