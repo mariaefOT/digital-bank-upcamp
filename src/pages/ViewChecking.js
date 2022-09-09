@@ -1,18 +1,19 @@
 import {useEffect, useState} from 'react';
 import { getAccounts } from '../api/index';
-import CheckingCards from "../components/CheckingCards";
+import CheckingCards from '../components/CheckingCards';
+import { authenticateUser } from '../axios/axios.config'
 import '../CSS/ViewChecking.css';
 
 const ViewChecking = () => {
     const [accounts, setAccounts] = useState([]);
 
-    useEffect (() => {
-        getAccounts().then(response => {
+    useEffect(() => {
+        authenticateUser().then((token) => {
+          getAccounts(token).then((response) => {
             setAccounts(response.data);
-        }).catch(error => {
-            console.log(error);
-        })
-    },[accounts]);
+          });
+        });
+    },[]);
 
     return (
         <div>
