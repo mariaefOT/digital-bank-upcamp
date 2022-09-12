@@ -3,9 +3,43 @@ import { render } from "@testing-library/react"
 
 import CheckingCards from "./CheckingCards";
 
+const accounts = [
+    {
+        name:'Joint Checking',
+        accountType:{
+            name:'Standard Checking',
+            interestRate: 0
+        },
+        ownershipType: {
+            name:'Joint'
+        },
+        accountNumber: 3476265,
+        currentBalance: 720
+    },
+    {
+        name:'Interest Checking',
+        accountType:{
+            name:'Interest Checking',
+            interestRate: 10
+        },
+        ownershipType: {
+            name:'Individual'
+        },
+        accountNumber: 2838212,
+        currentBalance: 230.50
+    }
+];
+
+const accountsZero = [];
+
 describe('CheckingCardsAccount test', () => {
     it('Render checking cards', () => {
-        const component = render(<CheckingCards/>);
+        const component = render(<CheckingCards accounts={accounts}/>);
+        expect(component).toBeDefined();
+    });
+
+    it('Render zero checking cards', () => {
+        const component = render(<CheckingCards accounts={accountsZero}/>);
         expect(component).toBeDefined();
     });
 });
