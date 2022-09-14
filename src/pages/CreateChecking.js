@@ -1,8 +1,9 @@
+import FormCreateChecking from "../components/FormCreateChecking";
 
 const CreateChecking = () => {
     return(
         <div>
-            <h1>Create Checking</h1>
+            <FormCreateChecking/>
         </div>
     )
 }
