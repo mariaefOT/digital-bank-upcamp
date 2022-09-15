@@ -79,7 +79,7 @@ const FormCreateChecking = () => {
                         </Form.Select>
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">
-                            Please select valid option
+                            Please select account type valid option
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -92,7 +92,7 @@ const FormCreateChecking = () => {
                         </Form.Select>
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">
-                            Please select valid option
+                            Please select account ownership valid option
                         </Form.Control.Feedback>
                     </Form.Group>
 
