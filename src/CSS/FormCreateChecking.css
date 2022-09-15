@@ -1,5 +1,6 @@
 .title {
   background-color: white;
+  font-size: calc(19px + 2vmin);
 }
 
 .title2 {

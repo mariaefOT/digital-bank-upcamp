@@ -1,12 +1,14 @@
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios';
+import '../CSS/FormCreateChecking.css';
+import { authenticateUser } from '../axios/axios.config';
+import { useNavigate } from "react-router-dom";
+import { postAccounts } from '../api/index';
 import { useState } from 'react';
-import '../CSS/FormCreateChecking.css'
 
 const FormCreateChecking = () => {
-    const [token, setToken] = useState([]);
+    let navigate = useNavigate();
     const [alert, setAlert] = useState(false);
     const [validated, setValidated] = useState(false);
     const [values, setValues] = useState({
@@ -14,19 +16,7 @@ const FormCreateChecking = () => {
         accountTypeCode: '',
         openingDeposit: '',
         ownerTypeCode: '',
-      });
-
-    const apiToken = () => {
-        axios.post('http://localhost:8080/bank/api/v1/auth?password=Demo123!&username=jsmith@demo.io', {
-    
-        })
-        .then(response => {
-            setToken(response.data.authToken);
-            console.log(token);
-        }).catch(error => {
-            console.log(error);
-        })
-    };
+    });
 
     const validateAll = () => {
         const { accountName, accountTypeCode, openingDeposit, ownerTypeCode } = values;
@@ -35,15 +25,12 @@ const FormCreateChecking = () => {
         if (!accountName) {
             isValid = false
         }
-    
         if (!openingDeposit || openingDeposit < 25) {
             isValid = false
         }
-    
         if (!ownerTypeCode) {
             isValid = false
         }
-
         if (!accountTypeCode) {
             isValid = false
         }
@@ -69,19 +56,12 @@ const FormCreateChecking = () => {
             setAlert(true);
         } else {
             setAlert(false);
-            apiToken();
-            axios.post('http://localhost:8080/bank/api/v1/user/account', JSON.stringify(values) ,{
-                headers: { 
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-                console.log(response.json());
-            }).catch(error => {
-                console.log(error);
-            })
-        }
+            authenticateUser().then((token) => {
+                postAccounts(token,JSON.stringify(values)).then(() => {
+                    navigate('/viewChecking');
+                });
+            });
+        };
     }
 
     return(
