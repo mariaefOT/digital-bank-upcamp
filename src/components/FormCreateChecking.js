@@ -1,11 +1,10 @@
-import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
-import Form from 'react-bootstrap/Form';
-import '../CSS/FormCreateChecking.css';
+import { Form, Button, Alert } from 'react-bootstrap'
 import { authenticateUser } from '../axios/axios.config';
-import { useNavigate } from "react-router-dom";
-import { postAccounts } from '../api/index';
+import { useNavigate } from 'react-router-dom';
+import { validateForm } from '../validations/validateCreateCheckingForm'
+import { createAccount } from '../api/index';
 import { useState } from 'react';
+import '../CSS/FormCreateChecking.css';
 
 const FormCreateChecking = () => {
     let navigate = useNavigate();
@@ -18,30 +17,19 @@ const FormCreateChecking = () => {
         ownerTypeCode: '',
     });
 
-    const validateAll = () => {
-        const { accountName, accountTypeCode, openingDeposit, ownerTypeCode } = values;
-        let isValid = true
-    
-        if (!accountName) {
-            isValid = false
-        }
-        if (!openingDeposit || openingDeposit < 25) {
-            isValid = false
-        }
-        if (!ownerTypeCode) {
-            isValid = false
-        }
-        if (!accountTypeCode) {
-            isValid = false
-        }
-
-        return isValid;
-      }
-
     const handleChange = (ev) => {
         const { name, value } = ev.target
-        setValues({ ...values, [name]: value })
-      }
+        setValues({ ...values, [name]: value });
+    };
+
+    const resetForm = () => {
+        setValues({
+            accountName: '',
+            accountTypeCode: '',
+            openingDeposit: '',
+            ownerTypeCode: '',
+        });
+    };
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
@@ -52,12 +40,12 @@ const FormCreateChecking = () => {
         } 
         setValidated(true);
 
-        if (!validateAll()) {
+        if (!validateForm(values)) {
             setAlert(true);
         } else {
             setAlert(false);
             authenticateUser().then((token) => {
-                postAccounts(token,JSON.stringify(values)).then(() => {
+                createAccount(token,JSON.stringify(values)).then(() => {
                     navigate('/viewChecking');
                 });
             });
@@ -66,10 +54,9 @@ const FormCreateChecking = () => {
 
     return(
         <div>
-            <h1 className='title'>Create Checking</h1>
-            <h3 className='title2'>New Checking Account</h3>
-            <div className='formulario'>
-                <Form noValidate validated={validated} onSubmit={(ev) => handleSubmit(ev)} className='form1'>
+            <h3 className='form-title'>New Checking Account</h3>
+            <div className='form-div'>
+                <Form noValidate validated={validated} onSubmit={(ev) => handleSubmit(ev)} className='form'>
                     <Form.Group className="mb-3" controlId="formCheckingAccountType">
                         <Form.Label><b>Select Checking Account Type</b></Form.Label>
                         <Form.Select required label="AccountType" name="accountTypeCode" value={values.accountTypeCode} onChange={handleChange}>
@@ -136,22 +123,15 @@ const FormCreateChecking = () => {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Button variant="primary" type="submit" className='btn1'>
+                    <Button variant="primary" type="submit" className='submit-btn'>
                         Submit
                     </Button>
 
-                    <Button variant="danger" type="button" className='btn2' onClick={
-                        () => {setValues({
-                                accountName: '',
-                                accountTypeCode: '',
-                                openingDeposit: '',
-                                ownerTypeCode: '',
-                            })}
-                        }>
+                    <Button variant="danger" type="button" className='reset-btn' onClick={() => {resetForm()}}>
                         Reset
                     </Button>
                 </Form>
-                {alert && <Alert className='alert' key='danger' variant='danger'>Please provide a valid data</Alert>}
+                {alert && <Alert className='error-message' key='danger' variant='danger'>Please provide a valid data</Alert>}
             </div>
         </div>
     );

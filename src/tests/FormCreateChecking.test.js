@@ -18,27 +18,21 @@ describe('FormCreateChecking test', () => {
         );
     });
 
-    it('Render checking form', () => {
-        const component = render(
+    it('Should render the Checking form when the Create Checking page is loaded', () => {
+        const view = render(
             <Router>
                 <FormCreateChecking/>
             </Router>
         );
-        expect(component).toBeDefined();
+        expect(view).toBeDefined();
 
-        const {queryByLabelText} = render(
-            <Router>
-                <FormCreateChecking/>
-            </Router>
-        );
-
-        expect(queryByLabelText(/Select Checking Account Type/i)).toBeTruthy();
-        expect(queryByLabelText(/Select Account Ownership/i)).toBeTruthy();
-        expect(queryByLabelText(/Account Name/i)).toBeTruthy();
-        expect(queryByLabelText(/Initial Deposit Amount/i)).toBeTruthy();
+        expect(screen.getByLabelText(/Select Checking Account Type/i)).toBeTruthy();
+        expect(screen.getByLabelText(/Select Account Ownership/i)).toBeTruthy();
+        expect(screen.getByLabelText(/Account Name/i)).toBeTruthy();
+        expect(screen.getByLabelText(/Initial Deposit Amount/i)).toBeTruthy();
     });
 
-    it('onSubmit is called when all fields pass validation', () => {
+    it('Should onSubmit is called when all fields pass validation', () => {
         const dropdownAccountType = screen.getByRole('combobox', {name: /select checking account type/i });
         user.selectOptions(dropdownAccountType, within(dropdownAccountType).getByRole('option', {name: 'Standard Checking'}));
 
@@ -58,7 +52,7 @@ describe('FormCreateChecking test', () => {
         });
     });
 
-    it('Requiered fields', () => {
+    it('Required fields must be displayed', () => {
         user.click(screen.getByRole('button', {name: /submit/i }));
 
         waitFor(() => {
@@ -69,15 +63,15 @@ describe('FormCreateChecking test', () => {
         });
     });
 
-    it('Reset button', () => {
+    it('The form should be cleared when calling Reset', () => {
         user.click(screen.getByRole('button', {name: /reset/i }));
 
         waitFor(() => {
             const dropdownAccountType = screen.getByRole('combobox', {name: /select checking account type/i });
-            expect(accountName).toEqual("Select Account Type");
+            expect(dropdownAccountType).toEqual("Select Account Type");
     
             const dropdownAccountOwnership = screen.getByRole('combobox', {name: /select account ownership/i });
-            expect(accountName).toEqual("Select Account Ownership");
+            expect(dropdownAccountOwnership).toEqual("Select Account Ownership");
 
             const accountName = screen.getByRole('textbox', {name: /account name/i });
             expect(accountName).toEqual("");

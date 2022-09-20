@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 
-const Navigation = () => {
+const NavigationBar = () => {
     return (
         <Navbar bg="light" expand="lg">
           <Container>
@@ -28,4 +28,4 @@ const Navigation = () => {
       );
 }
 
-export default Navigation;
+export default NavigationBar;

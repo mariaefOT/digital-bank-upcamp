@@ -1,4 +1,4 @@
-import Navigation from './components/Navigation';
+import NavigationBar from './components/NavigationBar';
 import Home from './pages/Home';
 import ViewChecking from './pages/ViewChecking';
 import CreateChecking from './pages/CreateChecking';
@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div className="App">
         <Router>
-          <Navigation/>
+          <NavigationBar/>
           <header className="App-header">
             <Routes>
               <Route path="/" element={<Home />}/>

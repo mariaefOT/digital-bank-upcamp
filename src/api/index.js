@@ -5,7 +5,7 @@ export const getAccounts = (token) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
-export const postAccounts = (token,data) =>
+export const createAccount = (token,data) =>
   axiosClient.post('user/account', data ,{
     headers: { 
         Authorization: `Bearer ${token}`,

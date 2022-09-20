@@ -1,9 +1,9 @@
-.title {
+.page-title {
   background-color: white;
   font-size: calc(19px + 2vmin);
 }
 
-.title2 {
+.form-title {
     background-color: #4481be;
     margin-bottom: 0px;
     color: white;
@@ -14,7 +14,7 @@
     margin-top: 30px;
   }
   
-  .formulario {
+  .form-div {
     background-color: white;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -22,20 +22,20 @@
     margin-right: 30px;
   }
   
-  .form1 {
+  .form {
     margin-left: 20px;
     margin-right: 20px;
   }
   
-  .btn1 {
+  .submit-btn {
     margin-bottom: 15px;
   }
   
-  .btn2 {
+  .reset-btn {
     margin-left: 10px;
     margin-bottom: 15px;
   }
 
-  .alert {
+  .error-message {
     margin-top: 5px;
   }
