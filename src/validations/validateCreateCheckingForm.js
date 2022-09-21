@@ -1,30 +1,18 @@
 
 const validateAccountName = (accountName) => {
-    if (!accountName) {
-        return false;
-    }
-    return true;
+    return !accountName;
 }
 
 const validateOpeningDeposit = (openingDeposit) => {
-    if (!openingDeposit || openingDeposit < 25) {
-        return false;
-    }
-    return true;
+    return !openingDeposit || openingDeposit < 25;
 }
 
 const validateOwnerTypeCode = (ownerTypeCode) => {
-    if (!ownerTypeCode) {
-        return false;
-    }
-    return true;
+    return !ownerTypeCode;
 }
 
 const validateAccountTypeCode = (accountTypeCode) => {
-    if (!accountTypeCode) {
-        return false;
-    }
-    return true;
+    return !accountTypeCode;
 }
 
 export const validateForm = (values) => {
