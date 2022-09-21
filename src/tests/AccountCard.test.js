@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 
-import AccountCard from './AccountCard'
+import AccountCard from '../components/AccountCard'
 
 const props = {
     name:'Joint Checking',

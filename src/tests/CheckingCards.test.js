@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect'
 import { render } from "@testing-library/react"
 
-import CheckingCards from "./CheckingCards";
+import CheckingCards from "../components/CheckingCards";
 
 const accounts = [
     {

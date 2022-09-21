@@ -1,13 +1,30 @@
+import NavigationBar from './components/NavigationBar';
+import Home from './pages/Home';
 import ViewChecking from './pages/ViewChecking';
+import CreateChecking from './pages/CreateChecking';
 import 'bootstrap/dist/css/bootstrap.min.css' ;
 import './CSS/App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Routes
+} from "react-router-dom";
 
 const App = () => {
   return (
     <div className="App">
-        <header className="App-header">
-          <ViewChecking/>
-        </header>
+        <Router>
+          <NavigationBar/>
+          <header className="App-header">
+            <Routes>
+              <Route path="/" element={<Home />}/>
+              <Route path="/viewChecking" element={<ViewChecking />}/>
+              <Route path="/createChecking" element={<CreateChecking />}/>
+            </Routes>
+          </header>
+        </Router>
     </div>
   );
 }
