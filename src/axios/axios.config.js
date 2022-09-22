@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//User
 export const authenticateUser = async () => {
   const response = await axiosClient.post(
     'auth',
@@ -7,6 +8,22 @@ export const authenticateUser = async () => {
     {
       params: {
         username: 'jsmith@demo.io',
+        password: 'Demo123!',
+      },
+    }
+  );
+
+  return response.data.authToken;
+};
+
+//Admin
+export const authenticateAdmin = async () => {
+  const response = await axiosClient.post(
+    'auth',
+    {},
+    {
+      params: {
+        username: 'admin@demo.io',
         password: 'Demo123!',
       },
     }
