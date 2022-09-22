@@ -36,7 +36,7 @@ const AccountCard = (props) => {
             {deleteCard &&
             <Card bg="primary" text='light' className="text-start">
                 <Card.Body>
-                    <Card.Title contentEditable={true} onBlur={(ev) => {handleUpdate(ev.target.textContent)}}>{props.item.name}</Card.Title>
+                    <Card.Title id='editableName' contentEditable={true} onBlur={(ev) => {handleUpdate(ev.target.textContent)}}>{props.item.name}</Card.Title>
                     <Card.Text>
                         Account: {props.item.accountType.name} <br/>
                         Ownership: {props.item.ownershipType.name} <br/>
@@ -46,7 +46,7 @@ const AccountCard = (props) => {
                     <Card.Title>Balance: $ {props.item.currentBalance}</Card.Title>
                 </Card.Body>
                 {props.admin && 
-                <Button variant="danger" type="button" className='delete-btn' onClick={() => {handleShowDelete()}}>
+                <Button variant="danger" id='btn-delete' type="button" className='btn-delete' onClick={() => {handleShowDelete()}}>
                     Delete
                 </Button>}
             </Card>}
@@ -55,7 +55,7 @@ const AccountCard = (props) => {
                 <Modal.Header closeButton>
                 <Modal.Title>Delete Account</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure you want to delete {props.item.name}?</Modal.Body>
+                <Modal.Body>Are you sure you want to delete <b>{props.item.name}</b>?</Modal.Body>
                 <Modal.Footer>
                 <Button variant="danger" onClick={handleCloseDelete}>
                     Cancel
