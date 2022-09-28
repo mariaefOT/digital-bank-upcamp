@@ -6,9 +6,13 @@ import '../CSS/ViewChecking.css';
 
 const ViewChecking = () => {
     const [accounts, setAccounts] = useState([]);
+    const user = {
+      username: 'jsmith@demo.io',
+      password: 'Demo123!',
+    };
 
     useEffect(() => {
-        authenticateUser().then((token) => {
+        authenticateUser(user).then((token) => {
           getAccounts(token).then((response) => {
             setAccounts(response.data);
           });
@@ -18,7 +22,7 @@ const ViewChecking = () => {
     return (
         <div>
             <h1 className="Title" >View Checking Accounts</h1>
-            <CheckingCards accounts={accounts} admin={false}/>
+            <CheckingCards accounts={accounts} isAdmin={false}/>
         </div>
     )
 }

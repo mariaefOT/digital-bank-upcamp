@@ -17,6 +17,11 @@ const FormCreateChecking = () => {
         ownerTypeCode: '',
     });
 
+    const user = {
+        username: 'jsmith@demo.io',
+        password: 'Demo123!',
+    };
+
     const handleChange = (ev) => {
         const { name, value } = ev.target
         setValues({ ...values, [name]: value });
@@ -44,7 +49,7 @@ const FormCreateChecking = () => {
             setAlert(true);
         } else {
             setAlert(false);
-            authenticateUser().then((token) => {
+            authenticateUser(user).then((token) => {
                 createAccount(token,JSON.stringify(values)).then(() => {
                     navigate('/viewChecking');
                 });

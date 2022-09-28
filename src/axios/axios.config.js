@@ -1,30 +1,13 @@
 import axios from 'axios';
 
-//User
-export const authenticateUser = async () => {
+export const authenticateUser = async (user) => {
   const response = await axiosClient.post(
     'auth',
     {},
     {
       params: {
-        username: 'jsmith@demo.io',
-        password: 'Demo123!',
-      },
-    }
-  );
-
-  return response.data.authToken;
-};
-
-//Admin
-export const authenticateAdmin = async () => {
-  const response = await axiosClient.post(
-    'auth',
-    {},
-    {
-      params: {
-        username: 'admin@demo.io',
-        password: 'Demo123!',
+        username: user.username,
+        password: user.password,
       },
     }
   );

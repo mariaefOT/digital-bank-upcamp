@@ -1,4 +1,4 @@
-import { authenticateUser, authenticateAdmin } from '../axios/axios.config'
+import { authenticateUser } from '../axios/axios.config'
 import { editAccount, deleteAccount } from '../api/index';
 import { Button, Modal, Card, ToastContainer, Toast } from 'react-bootstrap'
 import { useState } from 'react';
@@ -12,9 +12,19 @@ const AccountCard = (props) => {
     const handleCloseDelete = () => setShowDelete(false);
     const handleShowDelete = () => setShowDelete(true);
 
+    const user = {
+        username: 'jsmith@demo.io',
+        password: 'Demo123!',
+    };
+
+    const admin = {
+        username: 'admin@demo.io',
+        password: 'Demo123!',
+    };
+
     const handleUpdate = (name) => {
-        if (props.item.name != name && !!name) {
-            authenticateUser().then((token) => {
+        if (props.item.name !== name && !!name) {
+            authenticateUser(user).then((token) => {
                 editAccount(token,props.item.id,name).then(() => {
                     toggleShowAlert();
                 });
@@ -23,7 +33,7 @@ const AccountCard = (props) => {
     };
 
     const handleDelete = () => {
-        authenticateAdmin().then((token) => {
+        authenticateUser(admin).then((token) => {
             deleteAccount(token,props.item.id).then(() => {
                 setShowDelete(false);
                 setDeleteCard(false);
@@ -45,7 +55,7 @@ const AccountCard = (props) => {
                     </Card.Text>
                     <Card.Title>Balance: $ {props.item.currentBalance}</Card.Title>
                 </Card.Body>
-                {props.admin && 
+                {props.isAdmin && 
                 <Button variant="danger" id='btn-delete' type="button" className='btn-delete' onClick={() => {handleShowDelete()}}>
                     Delete
                 </Button>}
