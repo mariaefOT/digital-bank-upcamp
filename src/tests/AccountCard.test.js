@@ -25,7 +25,7 @@ describe('AccountCard test', () => {
     const cancelDelete = jest.fn();
 
     it('Render the AccountCard component with the specified props for User', () => {
-        const component = render(<AccountCard item={props} admin={false}/>);
+        const component = render(<AccountCard item={props} isAdmin={false}/>);
         expect(component).toBeDefined();
 
         verifyCardContent(component);
@@ -35,7 +35,7 @@ describe('AccountCard test', () => {
     });
 
     it('Render the AccountCard component with the specified props for Admin', () => {
-        const component = render(<AccountCard item={props} admin={true}/>);
+        const component = render(<AccountCard item={props} isAdmin={true}/>);
         expect(component).toBeDefined();
 
         verifyCardContent(component);
@@ -43,26 +43,11 @@ describe('AccountCard test', () => {
         expect(component.getByRole('button', {name: /delete/i })).toBeTruthy();
     });
 
-    it('The account should be deleted when selecting delete', async () => {
-        const component = render(<AccountCard item={props} admin={true}/>);
-        
+    it('The account should be deleted when pressing the Delete button', async () => {
+        const component = render(<AccountCard item={props} isAdmin={true}/>);
+    
         const accountName = component.getByText(props.name);
-        expect(accountName).toHaveTextContent(props.name);
-
-        const typeName = component.getByText(/Standard Checking/i);
-        expect(typeName).toHaveTextContent(props.accountType.name);
-
-        const typeInterestRate = component.getByText(/Interest Rate: 0%/i);
-        expect(typeInterestRate).toHaveTextContent(props.accountType.interestRate);
-
-        const ownershipName = component.getByText(/Ownership: Joint/i);
-        expect(ownershipName).toHaveTextContent(props.ownershipType.name);
-
-        const accountNumber = component.getByText(/3476265/i);
-        expect(accountNumber).toHaveTextContent(props.accountNumber);
-
-        const currentBalance = component.getByText(/720/i);
-        expect(currentBalance).toHaveTextContent(props.currentBalance);
+        verifyCardContent(component);
 
         user.click(screen.getByRole('button', {name: /delete/i }));
         
@@ -78,33 +63,13 @@ describe('AccountCard test', () => {
         });
 
         expect(accountName).not.toBeInTheDocument;
-        expect(typeName).not.toBeInTheDocument;
-        expect(typeInterestRate).not.toBeInTheDocument;
-        expect(ownershipName).not.toBeInTheDocument;
-        expect(accountNumber).not.toBeInTheDocument;
-        expect(currentBalance).not.toBeInTheDocument;
     });
 
-    it('The account should be not deleted when selecting cancel', async () => {
-        const component = render(<AccountCard item={props} admin={true}/>);
+    it('Should not be deleted when pressing the Cancel button', async () => {
+        const component = render(<AccountCard item={props} isAdmin={true}/>);
         
         const accountName = component.getByText(props.name);
-        expect(accountName).toHaveTextContent(props.name);
-
-        const typeName = component.getByText(/Standard Checking/i);
-        expect(typeName).toHaveTextContent(props.accountType.name);
-
-        const typeInterestRate = component.getByText(/Interest Rate: 0%/i);
-        expect(typeInterestRate).toHaveTextContent(props.accountType.interestRate);
-
-        const ownershipName = component.getByText(/Ownership: Joint/i);
-        expect(ownershipName).toHaveTextContent(props.ownershipType.name);
-
-        const accountNumber = component.getByText(/3476265/i);
-        expect(accountNumber).toHaveTextContent(props.accountNumber);
-
-        const currentBalance = component.getByText(/720/i);
-        expect(currentBalance).toHaveTextContent(props.currentBalance);
+        verifyCardContent(component);
 
         user.click(screen.getByRole('button', {name: /delete/i }));
         
@@ -120,15 +85,10 @@ describe('AccountCard test', () => {
         });
 
         expect(accountName).toHaveTextContent(props.name);
-        expect(typeName).toHaveTextContent(props.accountType.name);
-        expect(typeInterestRate).toHaveTextContent(props.accountType.interestRate);
-        expect(ownershipName).toHaveTextContent(props.ownershipType.name);
-        expect(accountNumber).toHaveTextContent(props.accountNumber);
-        expect(currentBalance).toHaveTextContent(props.currentBalance);
     });
 
     it('Should update the name when changing it', async () => {
-        const component = render(<AccountCard item={props} admin={false}/>);
+        const component = render(<AccountCard item={props} isAdmin={false}/>);
 
         const accountName = component.getByText(props.name);
         expect(accountName).toHaveTextContent(props.name);
@@ -141,7 +101,7 @@ describe('AccountCard test', () => {
     });
 
     it('Should not update the name when not change', async () => {
-        const component = render(<AccountCard item={props} admin={false}/>);
+        const component = render(<AccountCard item={props} isAdmin={false}/>);
 
         const accountName = component.getByText(props.name);
         expect(accountName).toHaveTextContent(props.name);

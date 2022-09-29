@@ -1,7 +1,6 @@
 import NavigationBar from './components/NavigationBar';
 import Home from './pages/Home';
 import ViewChecking from './pages/ViewChecking';
-import ViewCheckingAdmin from './pages/ViewCheckingAdmin';
 import CreateChecking from './pages/CreateChecking';
 import 'bootstrap/dist/css/bootstrap.min.css' ;
 import './CSS/App.css';
@@ -22,7 +21,6 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />}/>
               <Route path="/viewChecking" element={<ViewChecking />}/>
-              <Route path="/viewCheckingAdmin" element={<ViewCheckingAdmin />}/>
               <Route path="/createChecking" element={<CreateChecking />}/>
             </Routes>
           </header>

@@ -21,7 +21,6 @@ const NavigationBar = () => {
                   <NavDropdown.Item as={Link} to="/viewChecking">Checking Accounts</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/createChecking">Create Checking Accounts</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link as={Link} to="/viewCheckingAdmin">Checking Accounts Admin</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
