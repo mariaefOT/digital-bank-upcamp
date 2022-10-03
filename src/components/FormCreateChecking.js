@@ -1,7 +1,8 @@
 import { Form, Button, Alert } from 'react-bootstrap'
 import { authenticateUser } from '../axios/axios.config';
 import { useNavigate } from 'react-router-dom';
-import { validateForm } from '../validations/validateCreateCheckingForm'
+import { validateForm } from '../validations/validateCreateCheckingForm';
+import { getUser } from '../data/credentials';
 import { createAccount } from '../api/index';
 import { useState } from 'react';
 import '../CSS/FormCreateChecking.css';
@@ -16,11 +17,8 @@ const FormCreateChecking = () => {
         openingDeposit: '',
         ownerTypeCode: '',
     });
-
-    const user = {
-        username: 'jsmith@demo.io',
-        password: 'Demo123!',
-    };
+    
+    const user = getUser('USER');
 
     const handleChange = (ev) => {
         const { name, value } = ev.target

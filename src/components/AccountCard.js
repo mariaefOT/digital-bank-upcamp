@@ -1,29 +1,24 @@
-import { authenticateUser } from '../axios/axios.config'
+import { authenticateUser } from '../axios/axios.config';
 import { editAccount, deleteAccount } from '../api/index';
-import { Button, Modal, Card, ToastContainer, Toast } from 'react-bootstrap'
+import { Button, Modal, Card, ToastContainer, Toast } from 'react-bootstrap';
+import { getUser } from '../data/credentials';
+import { validateName } from '../validations/validateUpdateAccount';
 import { useState } from 'react';
 
 const AccountCard = (props) => {
     const [showDelete, setShowDelete] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-    const [deleteCard, setDeleteCard] = useState(true);
+    const [hideCard, setHideCard] = useState(true);
 
     const toggleShowAlert = () => setShowAlert(!showAlert);
     const handleCloseDelete = () => setShowDelete(false);
     const handleShowDelete = () => setShowDelete(true);
 
-    const user = {
-        username: 'jsmith@demo.io',
-        password: 'Demo123!',
-    };
-
-    const admin = {
-        username: 'admin@demo.io',
-        password: 'Demo123!',
-    };
+    const user = getUser('USER');
+    const admin = getUser('ADMIN');
 
     const handleUpdate = (name) => {
-        if (props.item.name !== name && !!name) {
+        if (validateName(props.item.name,name)) {
             authenticateUser(user).then((token) => {
                 editAccount(token,props.item.id,name).then(() => {
                     toggleShowAlert();
@@ -36,14 +31,14 @@ const AccountCard = (props) => {
         authenticateUser(admin).then((token) => {
             deleteAccount(token,props.item.id).then(() => {
                 setShowDelete(false);
-                setDeleteCard(false);
+                setHideCard(false);
             });
         });
     };
 
     return (
         <>
-            {deleteCard &&
+            {hideCard &&
             <Card bg="primary" text='light' className="text-start">
                 <Card.Body>
                     <Card.Title id='editableName' contentEditable={true} onBlur={(ev) => {handleUpdate(ev.target.textContent)}}>{props.item.name}</Card.Title>

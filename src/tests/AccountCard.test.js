@@ -19,8 +19,8 @@ const props = {
     currentBalance: 720
 }
 
-describe('AccountCard test', () => {
-    const deleteButton = jest.fn();
+describe('AccountCard tests', () => {
+    const btnDelete = jest.fn();
     const acceptDelete = jest.fn();
     const cancelDelete = jest.fn();
 
@@ -30,8 +30,7 @@ describe('AccountCard test', () => {
 
         verifyCardContent(component);
 
-        const button = component.queryByTestId(/btn-delete/i);
-        expect(button).toBeFalsy();
+        expect(component.queryByTestId(/btn-delete/i)).toBeFalsy();
     });
 
     it('Render the AccountCard component with the specified props for Admin', () => {
@@ -57,7 +56,7 @@ describe('AccountCard test', () => {
         user.click(screen.getByRole('button', {name: /save changes/i }));
 
         waitFor(() => {
-            expect(deleteButton).toHaveBeenCalledTimes(1);
+            expect(btnDelete).toHaveBeenCalledTimes(1);
             expect(acceptDelete).toHaveBeenCalledTimes(1);
             expect(cancelDelete).toHaveBeenCalledTimes(0);
         });
@@ -79,7 +78,7 @@ describe('AccountCard test', () => {
         user.click(screen.getByRole('button', {name: /cancel/i }));
 
         waitFor(() => {
-            expect(deleteButton).toHaveBeenCalledTimes(1);
+            expect(btnDelete).toHaveBeenCalledTimes(1);
             expect(cancelDelete).toHaveBeenCalledTimes(1);
             expect(acceptDelete).toHaveBeenCalledTimes(0);
         });

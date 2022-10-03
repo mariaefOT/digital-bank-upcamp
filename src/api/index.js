@@ -1,20 +1,11 @@
 import { axiosClient } from '../axios/axios.config';
 
-export const getAccounts = (rol,token) => {
-  if (rol === 'ADMIN') {
-    return(
-      axiosClient.get('account/checking', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-    )
-  }
-  if (rol === 'USER') {
-    return(
-      axiosClient.get('user/account/checking', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-    )
-  }
+export const getAccounts = (role,token) => {
+  return(
+    axiosClient.get((role === 'USER' ? 'user/' : '') + 'account/checking', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  )
 }
 
 export const createAccount = (token,data) =>
