@@ -20,7 +20,7 @@ const props = {
 }
 
 describe('AccountCard tests', () => {
-    const btnDelete = jest.fn();
+    const deleteBtn = jest.fn();
     const acceptDelete = jest.fn();
     const cancelDelete = jest.fn();
 
@@ -56,7 +56,7 @@ describe('AccountCard tests', () => {
         user.click(screen.getByRole('button', {name: /save changes/i }));
 
         waitFor(() => {
-            expect(btnDelete).toHaveBeenCalledTimes(1);
+            expect(deleteBtn).toHaveBeenCalledTimes(1);
             expect(acceptDelete).toHaveBeenCalledTimes(1);
             expect(cancelDelete).toHaveBeenCalledTimes(0);
         });
@@ -78,7 +78,7 @@ describe('AccountCard tests', () => {
         user.click(screen.getByRole('button', {name: /cancel/i }));
 
         waitFor(() => {
-            expect(btnDelete).toHaveBeenCalledTimes(1);
+            expect(deleteBtn).toHaveBeenCalledTimes(1);
             expect(cancelDelete).toHaveBeenCalledTimes(1);
             expect(acceptDelete).toHaveBeenCalledTimes(0);
         });
