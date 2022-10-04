@@ -19,7 +19,7 @@ const CheckingCards = (props) => {
                     {props.accounts.map(item => {
                         return(
                             <Col key={item.accountNumber}>
-                                <AccountCard item={item}/>
+                                <AccountCard item={item} isAdmin={props.isAdmin}/>
                             </Col>
                         )
                     })}

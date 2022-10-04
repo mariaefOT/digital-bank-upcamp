@@ -6,7 +6,7 @@ import user from '@testing-library/user-event'
 
 import FormCreateChecking from '../components/FormCreateChecking'
 
-describe('FormCreateChecking test', () => {
+describe('FormCreateChecking tests', () => {
     const onSubmit = jest.fn();
 
     beforeEach(() =>{

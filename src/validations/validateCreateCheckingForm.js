@@ -1,18 +1,18 @@
 
 const validateAccountName = (accountName) => {
-    return !accountName;
+    return !!accountName;
 }
 
 const validateOpeningDeposit = (openingDeposit) => {
-    return !openingDeposit || openingDeposit < 25;
+    return !!openingDeposit && openingDeposit >= 25;
 }
 
 const validateOwnerTypeCode = (ownerTypeCode) => {
-    return !ownerTypeCode;
+    return !!ownerTypeCode;
 }
 
 const validateAccountTypeCode = (accountTypeCode) => {
-    return !accountTypeCode;
+    return !!accountTypeCode;
 }
 
 export const validateForm = (values) => {

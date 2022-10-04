@@ -1,7 +1,8 @@
 import { Form, Button, Alert } from 'react-bootstrap'
 import { authenticateUser } from '../axios/axios.config';
 import { useNavigate } from 'react-router-dom';
-import { validateForm } from '../validations/validateCreateCheckingForm'
+import { validateForm } from '../validations/validateCreateCheckingForm';
+import { getUser } from '../data/credentials';
 import { createAccount } from '../api/index';
 import { useState } from 'react';
 import '../CSS/FormCreateChecking.css';
@@ -16,6 +17,8 @@ const FormCreateChecking = () => {
         openingDeposit: '',
         ownerTypeCode: '',
     });
+    
+    const user = getUser('USER');
 
     const handleChange = (ev) => {
         const { name, value } = ev.target
@@ -44,7 +47,7 @@ const FormCreateChecking = () => {
             setAlert(true);
         } else {
             setAlert(false);
-            authenticateUser().then((token) => {
+            authenticateUser(user).then((token) => {
                 createAccount(token,JSON.stringify(values)).then(() => {
                     navigate('/viewChecking');
                 });

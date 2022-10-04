@@ -32,7 +32,7 @@ const accounts = [
 
 const accountsZero = [];
 
-describe('CheckingCardsAccount test', () => {
+describe('CheckingCardsAccount tests', () => {
     it('Render checking cards', () => {
         const component = render(<CheckingCards accounts={accounts}/>);
         expect(component).toBeDefined();
