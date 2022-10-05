@@ -1,5 +1,8 @@
-import '@testing-library/jest-dom/extend-expect'
-import { render } from "@testing-library/react"
+import '@testing-library/jest-dom/extend-expect';
+import { render } from "@testing-library/react";
+import { getAccountsList } from "../reducers/accountsReducer"; 
+import { store } from "../reducers/store";
+import { Provider } from "react-redux";
 
 import CheckingCards from "../components/CheckingCards";
 
@@ -34,12 +37,24 @@ const accountsZero = [];
 
 describe('CheckingCardsAccount tests', () => {
     it('Render checking cards', () => {
-        const component = render(<CheckingCards accounts={accounts}/>);
+        const component = render(
+            <Provider store={store}>
+                <CheckingCards/>
+            </Provider> 
+        );
+
+        store.dispatch(getAccountsList(accounts));
         expect(component).toBeDefined();
     });
 
     it('Render zero checking cards', () => {
-        const component = render(<CheckingCards accounts={accountsZero}/>);
+        const component = render(
+            <Provider store={store}>
+                <CheckingCards/>
+            </Provider> 
+        );
+
+        store.dispatch(getAccountsList(accountsZero));
         expect(component).toBeDefined();
     });
 });
