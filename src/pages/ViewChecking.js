@@ -1,18 +1,20 @@
-import {useEffect, useState} from 'react';
+import {useEffect } from 'react';
 import { getAccounts } from '../api/index';
 import CheckingCards from '../components/CheckingCards';
 import { authenticateUser } from '../axios/axios.config';
+import { useDispatch } from 'react-redux';
 import { getUser } from '../data/credentials';
+import { getAccountsList } from '../reducers/accountsReducer'; 
 import '../CSS/ViewChecking.css';
 
 const ViewChecking = () => {
-  const [accounts, setAccounts] = useState([]);
+  const dispatch = useDispatch();
   const user = getUser('USER'); //Modify ADMIN or USER view here
-  
+
   useEffect(() => {
       authenticateUser(user).then((token) => {
         getAccounts(user.type,token).then((response) => {
-          setAccounts(response.data);
+          dispatch(getAccountsList(response.data))
         });
       });
   },[]);
@@ -20,7 +22,7 @@ const ViewChecking = () => {
   return(
     <div>
       <h1 className="Title" >View Checking Accounts</h1>
-      <CheckingCards accounts={accounts} isAdmin={user.type === 'ADMIN' ? true : false}/>
+      <CheckingCards isAdmin={user.type === 'ADMIN' ? true : false}/>
     </div>
   )
 }
