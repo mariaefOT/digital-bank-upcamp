@@ -37,24 +37,24 @@ const accountsZero = [];
 
 describe('CheckingCardsAccount tests', () => {
     it('Render checking cards', () => {
-        const component = render(
+        const view = render(
             <Provider store={store}>
                 <CheckingCards/>
             </Provider> 
         );
 
         store.dispatch(getAccountsList(accounts));
-        expect(component).toBeDefined();
+        expect(view).toBeDefined();
     });
 
     it('Render zero checking cards', () => {
-        const component = render(
+        const view = render(
             <Provider store={store}>
                 <CheckingCards/>
             </Provider> 
         );
 
         store.dispatch(getAccountsList(accountsZero));
-        expect(component).toBeDefined();
+        expect(view).toBeDefined();
     });
 });
