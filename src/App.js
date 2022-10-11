@@ -33,23 +33,3 @@ const App = () => {
 }
 
 export default App;
-
-/*
-const App = () => {
-  return (
-    <div className="App">
-        <Router>
-          <NavigationBar/>
-          <header className="App-header">
-            <Routes>
-              <Route path="/" element={<LoginScreen />}/>
-              <Route path="/home" element={<Home />}/>
-              <Route path="/viewChecking" element={<ViewChecking />}/>
-              <Route path="/createChecking" element={<CreateChecking />}/>
-            </Routes>
-          </header>
-        </Router>
-    </div>
-  );
-}
-*/
