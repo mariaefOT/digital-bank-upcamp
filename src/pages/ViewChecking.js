@@ -2,7 +2,6 @@ import {useEffect } from 'react';
 import { getAccounts } from '../api/index';
 import CheckingCards from '../components/CheckingCards';
 import { useDispatch } from 'react-redux';
-import { getUser } from '../data/credentials';
 import { getAccountsList } from '../reducers/accountsReducer'; 
 import '../CSS/ViewChecking.css';
 
