@@ -1,4 +1,4 @@
-import { Form, Button, Alert } from 'react-bootstrap'
+import { Form, Button, Alert } from 'react-bootstrap';
 import { authenticateUser } from '../axios/axios.config';
 import { useNavigate } from 'react-router-dom';
 import { validateForm } from '../validations/validateCreateCheckingForm';
