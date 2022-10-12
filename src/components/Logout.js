@@ -23,7 +23,7 @@ const Logout = () => {
 
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                <Modal.Title>Logout</Modal.Title>
+                <Modal.Title>Logout Bank</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Do you really want to log out?</Modal.Body>
                 <Modal.Footer>
