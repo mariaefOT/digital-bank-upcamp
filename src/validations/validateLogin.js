@@ -8,8 +8,8 @@ const validatePassword = (pass) => {
     return !!pass && pass.length >= 8;
 }
 
-export const validateLoginForm = (values) => {
-    const { username, password } = values;
+export const validateLoginForm = (credentials) => {
+    const { username, password } = credentials;
     let isValid = true;
 
     isValid = validateUserName(username);

@@ -15,10 +15,10 @@ export const authenticateUser = async (user) => {
   return response.data.authToken;
 };
 
-export const getRole = (token) => {
+export const getRole = () => {
   return(
     axiosClient.get('user/role', {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
     })
   )
 }

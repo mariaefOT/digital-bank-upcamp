@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { Form, Button, Alert, Badge } from 'react-bootstrap';
-import { authenticateUser, getRole } from "../api";
+import { login } from '../api/login';
 import { useNavigate } from 'react-router-dom';
 import { validateLoginForm } from "../validations/validateLogin";
 
 const Login = () => {
     let navigate = useNavigate(); 
     const [validated, setValidated] = useState(false);
-    const [show, setShow] = useState(false);
-    const [values, setValues] = useState({
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
+    const [credentials, setCredentials] = useState({
         username:'',
         password:''
     });
 
     const handleChange = (ev) => {
         const { name, value } = ev.target
-        setValues({ ...values, [name]: value });
+        setCredentials({ ...credentials, [name]: value });
     };
 
     const handleSubmit = (ev) => {
@@ -27,37 +27,24 @@ const Login = () => {
         } 
         setValidated(true);
         
-        if (!validateLoginForm(values)) {
-            setShow(true);
+        if (!validateLoginForm(credentials)) {
+            setShowErrorMessage(true);
         } else {
-            setShow(false);
-            authenticateUser(values).then((token) => {
-                sessionStorage.setItem('token',token); 
-                getRole(token).then((response) => {
-                    const role = `${response.data[0].authority} ${response.data[1].authority}`;
-                    if(role.includes('ADMIN')){
-                        sessionStorage.setItem('role','ADMIN');
-                    }
-                    if(role.includes('USER')){
-                        sessionStorage.setItem('role','USER'); 
-                    }
-                    navigate('/home'); 
-                });
-            }).catch((error) => {
-                if (error.code === 'ERR_BAD_REQUEST') {
-                    setValidated(false);
-                    setShow(true);
-                }
-                console.log(error)
-            });
+            setShowErrorMessage(false);
+            if(login(credentials)){
+                navigate('/home'); 
+            } else {
+                setValidated(false);
+                setShowErrorMessage(true);
+            };
         };
     }
-
+    
   return (
     <div>
         <h2 className="form-title">Login</h2>
         <div className='form-div'>
-            {show && <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+            {showErrorMessage && <Alert variant="danger" onClose={() => setShowErrorMessage(false)} dismissible>
                 <p>
                 <Badge bg="danger">Error</Badge>{' '}
                 Failed to login! Check your credentials please.
@@ -71,7 +58,7 @@ const Login = () => {
                         type="text" 
                         name="username" 
                         pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$"
-                        value={values.username}
+                        value={credentials.username}
                         placeholder="Enter User Name" 
                         onChange={handleChange}
                     />
@@ -87,7 +74,7 @@ const Login = () => {
                         type="password" 
                         name="password" 
                         minLength={8}
-                        value={values.password}
+                        value={credentials.password}
                         placeholder="Enter Password" 
                         onChange={handleChange}
                     />

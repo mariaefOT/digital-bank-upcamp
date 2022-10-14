@@ -1,14 +1,14 @@
 import Login from "../components/Login";
 import '../CSS/Login.css';
 
-const LoginScreen = () => {
+const LoginPage = () => {
     return(
-        <div className="conteiner">
-            <div className="login">
+        <div className="container">
+            <div className="login-div">
                 <Login/>
             </div>
         </div>
     )
 }
 
-export default LoginScreen;
+export default LoginPage;

@@ -17,7 +17,7 @@ describe('Logout tests', () => {
         useNavigate: () => mockedUsedNavigate,
     }));
 
-    it('Should logout with successfully and redirect to the login after', async () => {
+    it('Should log out successfully after pressing the logout confirmation button', async () => {
         const view = render(
             <Router>
                 <Logout/>

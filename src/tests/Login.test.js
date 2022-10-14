@@ -36,9 +36,9 @@ describe('Login tests', () => {
         expect(screen.getByLabelText(/Password/i)).toBeTruthy();
     });
 
-    it('Should onSubmit is called when all fields pass validation and redirect', () => {
-        const userName = screen.getByRole('textbox', {name: /user name/i });
-        user.type(userName, 'jsmith@demo.io');
+    it('Should log in when the "Sign In" button is pressed', () => {
+        const usernameInput = screen.getByRole('textbox', {name: /user name/i });
+        user.type(usernameInput, 'jsmith@demo.io');
 
         const password = screen.getByLabelText(/password/i);
         user.type(password, 'Demo123!');
@@ -51,7 +51,7 @@ describe('Login tests', () => {
         });
     });
 
-    it('Required fields must be displayed and not redirect', () => {
+    it('"Should show an error message when the credentials are invalid when the login form fields are empty"', () => {
         user.click(screen.getByRole('button', {name: /SIGN IN/i }));
 
         waitFor(() => {
