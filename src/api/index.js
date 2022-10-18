@@ -1,34 +1,57 @@
 import { axiosClient } from '../axios/axios.config';
 
-export const getAccounts = (role,token) => {
+export const authenticateUser = async (user) => {
+  const response = await axiosClient.post(
+    'auth',
+    {},
+    {
+      params: {
+        username: user.username,
+        password: user.password,
+      },
+    }
+  );
+
+  return response.data.authToken;
+};
+
+export const getRole = () => {
   return(
-    axiosClient.get(`${role === 'USER' ? 'user/' : ''}account/checking`, {
-      headers: { Authorization: `Bearer ${token}` },
+    axiosClient.get('user/role', {
+      headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
     })
   )
 }
 
-export const createAccount = (token,data) =>
+export const getAccounts = () => {
+  return(
+    axiosClient.get(`${sessionStorage.getItem("role") === 'USER' ? 'user/' : ''}account/checking`, {
+      headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
+    })
+  )
+}
+
+export const createAccount = (data) =>
   axiosClient.post('user/account', data ,{
     headers: { 
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         'Content-Type': 'application/json',
     }
   });
 
-  export const editAccount = (token,id,newName) =>
+  export const editAccount = (id,newName) =>
   axiosClient.put(`account/${id}`,{}, {
     headers: { 
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
     params: {
       newName: newName
     }
   });
 
-  export const deleteAccount = (token,id) =>
+  export const deleteAccount = (id) =>
   axiosClient.delete(`account/${id}`, {
     headers: { 
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     }
   });

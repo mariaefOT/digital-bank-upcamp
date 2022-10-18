@@ -1,7 +1,5 @@
-import { authenticateUser } from '../axios/axios.config';
 import { editAccount, deleteAccount } from '../api/index';
 import { Button, Modal, Card, ToastContainer, Toast } from 'react-bootstrap';
-import { getUser } from '../data/credentials';
 import { validateName } from '../validations/validateUpdateAccount';
 import { useState } from 'react';
 
@@ -14,25 +12,18 @@ const AccountCard = (props) => {
     const handleCloseDelete = () => setShowDelete(false);
     const handleShowDelete = () => setShowDelete(true);
 
-    const user = getUser('USER');
-    const admin = getUser('ADMIN');
-
     const handleUpdate = (name) => {
         if (validateName(props.item.name,name)) {
-            authenticateUser(user).then((token) => {
-                editAccount(token,props.item.id,name).then(() => {
-                    toggleShowAlert();
-                });
+            editAccount(props.item.id,name).then(() => {
+                toggleShowAlert();
             });
         };
     };
 
     const handleDelete = () => {
-        authenticateUser(admin).then((token) => {
-            deleteAccount(token,props.item.id).then(() => {
-                setShowDelete(false);
-                setHideCard(false);
-            });
+        deleteAccount(props.item.id).then(() => {
+            setShowDelete(false);
+            setHideCard(false);
         });
     };
 
