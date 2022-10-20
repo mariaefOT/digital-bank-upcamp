@@ -10,10 +10,6 @@ const validatePassword = (pass) => {
 
 export const validateLoginForm = (credentials) => {
     const { username, password } = credentials;
-    let isValid = true;
 
-    isValid = validateUserName(username);
-    isValid = validatePassword(password);
-
-    return isValid;
+    return (validateUserName(username) && validatePassword(password));
 }

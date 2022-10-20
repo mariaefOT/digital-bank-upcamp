@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { createNewUser, addApiRole } from "../api/index";
 import { userRegistrationData } from "../data/userRegistrationData";
+import { validateUserRegistration } from "../validations/validateUserRegistration";
 
 const UserRegistration = () => {
     let navigate = useNavigate(); 
@@ -23,33 +24,35 @@ const UserRegistration = () => {
         } 
         setValidated(true);
 
-        //Validaciones TODO
-        const { title, firstName, lastName, gender, dob, ssn, emailAddress, password, address, country, locality, region, homePhone, workPhone, mobilePhone, postalCode } = values;
-        const newUser = {
-            title: title,
-            firstName: firstName,
-            lastName: lastName,
-            gender: gender,
-            dob: dob,
-            ssn: ssn,
-            emailAddress: emailAddress,
-            password: password,
-            address: address,
-            country: country,
-            locality: locality,
-            region: region,
-            homePhone: homePhone,
-            workPhone: workPhone,
-            mobilePhone: mobilePhone,
-            postalCode: postalCode,
+        if(!validateUserRegistration(values)){
+            console.log("ERROR!")
+        } else {
+            const { title, firstName, lastName, gender, dob, ssn, emailAddress, password, address, country, locality, region, homePhone, workPhone, mobilePhone, postalCode } = values;
+            const newUser = {
+                title: title,
+                firstName: firstName,
+                lastName: lastName,
+                gender: gender,
+                dob: dob,
+                ssn: ssn,
+                emailAddress: emailAddress,
+                password: password,
+                address: address,
+                country: country,
+                locality: locality,
+                region: region,
+                homePhone: homePhone,
+                workPhone: workPhone,
+                mobilePhone: mobilePhone,
+                postalCode: postalCode,
+            };
+    
+            createNewUser(JSON.stringify(newUser)).then((response) => {
+                addApiRole(response.data.id); 
+                navigate('/');
+            });
         };
-
-        createNewUser(JSON.stringify(newUser)).then((response) => {
-            addApiRole(response.data.id); 
-            navigate('/');
-        });
-
-    }
+    };
 
     return(
         <div>

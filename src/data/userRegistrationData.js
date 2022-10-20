@@ -15,7 +15,6 @@ export const userRegistrationData = {
     workPhone: '',
     mobilePhone: '',
     postalCode: '',
-
     confirmPassword: '',
     agreeTerms: ''
 };
