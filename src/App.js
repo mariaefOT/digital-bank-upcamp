@@ -3,6 +3,7 @@ import ViewChecking from './pages/ViewChecking';
 import CreateChecking from './pages/CreateChecking';
 import LoginPage from './pages/LoginPage';
 import NavbarLayout from './components/NavbarLayout';
+import CreateUser from './pages/CreateUser';
 import 'bootstrap/dist/css/bootstrap.min.css' ;
 import './CSS/App.css';
 import {
@@ -25,6 +26,7 @@ const App = () => {
                 <Route path="/createChecking" element={<CreateChecking />}/>
               </Route>
               <Route path="/" element={<LoginPage />}/>
+              <Route path="/createUser" element={<CreateUser />}/>
             </Routes>
           </header>
         </Router>
