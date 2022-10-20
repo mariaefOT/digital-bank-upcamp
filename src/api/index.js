@@ -55,3 +55,19 @@ export const createAccount = (data) =>
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     }
   });
+
+  export const createNewUser = (newUser) =>
+  axiosClient.post('user', newUser ,{
+    headers: { 
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBkZW1vLmlvIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9BUEkifSx7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImlhdCI6MTY2NjI4NzE3OSwiZXhwIjoxNjY2MjkwNzc5fQ.6y0kQU3HyJZhcqtPiQOKH1G1Np2iIwn88fqG4DnIsns`,
+        'Content-Type': 'application/json',
+    }
+  });
+
+  export const addApiRole = (id) =>
+  axiosClient.put(`user/${id}/role?role=API`,{},{
+      headers: { 
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBkZW1vLmlvIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9BUEkifSx7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImlhdCI6MTY2NjI4NzE3OSwiZXhwIjoxNjY2MjkwNzc5fQ.6y0kQU3HyJZhcqtPiQOKH1G1Np2iIwn88fqG4DnIsns`,
+      }
+    }
+  );

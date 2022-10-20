@@ -1,30 +1,13 @@
 import { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { createNewUser, addApiRole } from "../api/index";
+import { userRegistrationData } from "../data/userRegistrationData";
 
 const UserRegistration = () => {
+    let navigate = useNavigate(); 
     const [validated, setValidated] = useState(false);
-    const [values, setValues] = useState({
-        title: '',
-        firstName: '',
-        lastName: '',
-        gender: '',
-        dob: '',
-        ssn: '',
-        emailAddress: '',
-        password: '',
-        address: '',
-        country: '',
-        locality: '',
-        region: '',
-        homePhone: '',
-        workPhone: '',
-        mobilePhone: '',
-        postalCode: '',
-
-        confirmPassword: '',
-        agreeTerms: ''
-    });
+    const [values, setValues] = useState(userRegistrationData);
 
     const handleChange = (ev) => {
         const { name, value } = ev.target
@@ -33,12 +16,44 @@ const UserRegistration = () => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        console.log(values);
+
+        const form = ev.currentTarget;
+        if (form.checkValidity() === false) {
+            ev.stopPropagation();
+        } 
+        setValidated(true);
+
+        //Validaciones TODO
+        const { title, firstName, lastName, gender, dob, ssn, emailAddress, password, address, country, locality, region, homePhone, workPhone, mobilePhone, postalCode } = values;
+        const newUser = {
+            title: title,
+            firstName: firstName,
+            lastName: lastName,
+            gender: gender,
+            dob: dob,
+            ssn: ssn,
+            emailAddress: emailAddress,
+            password: password,
+            address: address,
+            country: country,
+            locality: locality,
+            region: region,
+            homePhone: homePhone,
+            workPhone: workPhone,
+            mobilePhone: mobilePhone,
+            postalCode: postalCode,
+        };
+
+        createNewUser(JSON.stringify(newUser)).then((response) => {
+            addApiRole(response.data.id); 
+            navigate('/');
+        });
+
     }
 
     return(
         <div>
-            <h3 className='form-title'>Create New User</h3>
+            <h3 className='form-title'>Register user</h3>
             <div className='form-div'>
                 <Form noValidate validated={validated} onSubmit={(ev) => handleSubmit(ev)} className='form'>
 
