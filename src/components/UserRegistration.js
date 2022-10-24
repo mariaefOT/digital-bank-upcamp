@@ -236,7 +236,7 @@ const UserRegistration = () => {
                         </Form.Group> 
 
                         <Form.Group className="mb-3" controlId="formConfirmPassword">
-                            <Form.Label><b>Confirm password</b></Form.Label>
+                            <Form.Label><b>Confirm</b></Form.Label>
                             <Form.Control 
                                 required
                                 type="password" 
