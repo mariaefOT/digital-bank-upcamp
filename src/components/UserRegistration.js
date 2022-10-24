@@ -1,17 +1,22 @@
-import { useState } from "react";
-import { Form, Button } from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { createNewUser, addApiRole } from "../api/index";
 import { userRegistrationData } from "../data/userRegistrationData";
 import { validateUserRegistration } from "../validations/validateUserRegistration";
 import { login } from "../api/login";
-import '../CSS/UserRegistration.css';
+import "../CSS/UserRegistration.css";
 
 const UserRegistration = () => {
     let navigate = useNavigate(); 
     const [step, setStep] = useState(1);
     const [validated, setValidated] = useState(false);
+    const [alert, setAlert] = useState(false);
     const [values, setValues] = useState(userRegistrationData);
+
+    useEffect(() => {
+        login({username:'admin@demo.io', password:'Demo123!'});
+    },[]);
 
     const handleChange = (ev) => {
         const { name, value } = ev.target
@@ -28,7 +33,7 @@ const UserRegistration = () => {
         setValidated(true);
 
         if(!validateUserRegistration(values)){
-            console.log("ERROR!")
+            setAlert(true);
         } else {
             const { title, firstName, lastName, gender, dob, ssn, emailAddress, password, address, country, locality, region, homePhone, workPhone, mobilePhone, postalCode } = values;
             const newUser = {
@@ -49,8 +54,8 @@ const UserRegistration = () => {
                 mobilePhone: mobilePhone,
                 postalCode: postalCode,
             };
-    
-            login({username:'admin@demo.io', password:'Demo123!'});
+
+            setAlert(false);
             createNewUser(JSON.stringify(newUser)).then((response) => {
                 addApiRole(response.data.id); 
                 navigate('/');
@@ -437,6 +442,7 @@ const UserRegistration = () => {
                     </div>}
                 </Form>
             </div>
+            {alert && <Alert className='error-message' key='danger' variant='danger'>Please provide a valid data</Alert>}
         </div>
     )
 }
