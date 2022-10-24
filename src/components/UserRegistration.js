@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { createNewUser, addApiRole } from "../api/index";
 import { userRegistrationData } from "../data/userRegistrationData";
 import { validateUserRegistration } from "../validations/validateUserRegistration";
+import { login } from "../api/login";
 
 const UserRegistration = () => {
     let navigate = useNavigate(); 
@@ -47,6 +48,7 @@ const UserRegistration = () => {
                 postalCode: postalCode,
             };
     
+            login({username:'admin@demo.io', password:'Demo123!'});
             createNewUser(JSON.stringify(newUser)).then((response) => {
                 addApiRole(response.data.id); 
                 navigate('/');
