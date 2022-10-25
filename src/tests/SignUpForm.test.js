@@ -97,7 +97,7 @@ describe('FormCreateChecking tests', () => {
         });
     });
 
-    it('It should display form incomplete alert', () => {
+    it('Should display form incomplete alert', () => {
         user.click(screen.getByRole('button', {name: /next/i }));
         user.click(screen.getByRole('button', {name: /next/i }));
         user.click(screen.getByRole('button', {name: /submit/i }));
@@ -107,7 +107,7 @@ describe('FormCreateChecking tests', () => {
         });
     });
 
-    it('You should return to the previous page of the form when pressing the previous button', () => {
+    it('Should return to the previous page of the form when pressing the previous button', () => {
 
         user.click(screen.getByRole('button', {name: /next/i }));
         user.click(screen.getByRole('button', {name: /next/i }));
