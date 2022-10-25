@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getAccountsList } from '../reducers/accountsReducer'; 
 import '../CSS/ViewChecking.css';
 
-const ViewChecking = () => {
+const CheckingView = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,4 +22,4 @@ const ViewChecking = () => {
   )
 }
 
-export default ViewChecking;
+export default CheckingView;

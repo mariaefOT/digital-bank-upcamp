@@ -1,6 +1,6 @@
 import FormCreateChecking from "../components/FormCreateChecking";
 
-const CreateChecking = () => {
+const CreateCheckingView = () => {
     return(
         <div>
             <h1 className='page-title'>Create Checking</h1>
@@ -9,4 +9,4 @@ const CreateChecking = () => {
     )
 }
 
-export default CreateChecking;
+export default CreateCheckingView;

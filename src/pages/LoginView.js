@@ -2,7 +2,7 @@ import Login from "../components/Login";
 import { Link } from 'react-router-dom';
 import '../CSS/Login.css';
 
-const LoginPage = () => {
+const LoginView = () => {
     return(
         <div className="container">
             <div className="login-div">
@@ -14,8 +14,8 @@ const LoginPage = () => {
                 </h1> 
                 <Login/>
                 <div>
-                    Don't have account? 
-                    <Link to="/createUser">
+                    Have an account?
+                    <Link to="/user/register">
                         <p>Sign Up Here</p>
                     </Link>
                 </div>
@@ -24,4 +24,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default LoginView;

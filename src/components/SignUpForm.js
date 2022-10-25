@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { createNewUser, addApiRole } from "../api/index";
 import { userRegistrationData } from "../data/userRegistrationData";
 import { validateUserRegistration } from "../validations/validateUserRegistration";
+import { credentialsAdmin } from "../data/credentials";
 import { login } from "../api/login";
 import "../CSS/UserRegistration.css";
 
-const UserRegistration = () => {
+
+const SignUpForm = () => {
     let navigate = useNavigate(); 
     const [step, setStep] = useState(1);
     const [validated, setValidated] = useState(false);
@@ -15,7 +17,7 @@ const UserRegistration = () => {
     const [values, setValues] = useState(userRegistrationData);
 
     useEffect(() => {
-        login({username:'admin@demo.io', password:'Demo123!'});
+        login(credentialsAdmin);
     },[]);
 
     const handleChange = (ev) => {
@@ -27,7 +29,7 @@ const UserRegistration = () => {
         ev.preventDefault();
 
         const form = ev.currentTarget;
-        if (form.checkValidity() === false) {
+        if (!form.checkValidity()) {
             ev.stopPropagation();
         } 
         setValidated(true);
@@ -35,28 +37,8 @@ const UserRegistration = () => {
         if(!validateUserRegistration(values)){
             setAlert(true);
         } else {
-            const { title, firstName, lastName, gender, dob, ssn, emailAddress, password, address, country, locality, region, homePhone, workPhone, mobilePhone, postalCode } = values;
-            const newUser = {
-                title: title,
-                firstName: firstName,
-                lastName: lastName,
-                gender: gender,
-                dob: dob,
-                ssn: ssn,
-                emailAddress: emailAddress,
-                password: password,
-                address: address,
-                country: country,
-                locality: locality,
-                region: region,
-                homePhone: homePhone,
-                workPhone: workPhone,
-                mobilePhone: mobilePhone,
-                postalCode: postalCode,
-            };
-
             setAlert(false);
-            createNewUser(JSON.stringify(newUser)).then((response) => {
+            createNewUser(JSON.stringify(values)).then((response) => {
                 addApiRole(response.data.id); 
                 navigate('/');
             });
@@ -68,9 +50,9 @@ const UserRegistration = () => {
             <h3 className='form-title'>Register user</h3>
             <div className='form-div'>
                 <Form noValidate validated={validated} onSubmit={(ev) => handleSubmit(ev)} className='form'>
-                    {step == 1 && 
+                    {step === 1 && 
                     <div>
-                        <h4 className="form-sub-title">Personal information</h4>
+                        <h4 className="form-subtitle">Personal information</h4>
                         <Form.Group className="mb-3" controlId="formTitle">
                             <Form.Label><b>Title</b></Form.Label>
                             <Form.Select required label="title" name="title" value={values.title} onChange={handleChange}>
@@ -194,9 +176,9 @@ const UserRegistration = () => {
                         </Button>
                     </div>}
 
-                    {step == 2 && 
+                    {step === 2 && 
                     <div>
-                        <h4 className="form-sub-title">Credential information</h4>
+                        <h4 className="form-subtitle">Credential information</h4>
                         <Form.Group className="mb-3" controlId="formEmailAddress">
                             <Form.Label><b>Email Address</b></Form.Label>
                             <Form.Control 
@@ -260,9 +242,9 @@ const UserRegistration = () => {
                         </Button>
                     </div>}
 
-                    {step == 3 && 
+                    {step === 3 && 
                     <div>
-                        <h4 className="form-sub-title">Contact information</h4>
+                        <h4 className="form-subtitle">Contact information</h4>
                         <Form.Group className="mb-3" controlId="formAddress">
                             <Form.Label><b>Address</b></Form.Label>
                             <Form.Control 
@@ -447,4 +429,4 @@ const UserRegistration = () => {
     )
 }
 
-export default UserRegistration;
+export default SignUpForm;
