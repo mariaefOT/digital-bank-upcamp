@@ -1,4 +1,5 @@
 import { Form, Button, Alert } from 'react-bootstrap';
+import { validateTransaction } from '../validations/validateTransaction';
 import { makeTransaction, getAccounts } from '../api';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -38,7 +39,14 @@ const Transaction = (props) => {
             ev.stopPropagation();
         } 
         setValidated(true);
-        console.log(values)
+        console.log(values);
+
+        if(!validateTransaction(values)){
+            setAlert(true);
+        } else {
+            setAlert(false);
+            //ToDo
+        };
     };
 
     return(
