@@ -1,8 +1,10 @@
+import Transaction from "../components/Transaction";
 
 const DepositsView = () => {
     return(
         <div>
-            <h1>Deposits</h1>
+            <h1 className="Title" >Deposits</h1>
+            <Transaction type={'deposit'}/>
         </div>
     )
 }
