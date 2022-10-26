@@ -17,12 +17,9 @@ const validateAccountTypeCode = (accountTypeCode) => {
 
 export const validateForm = (values) => {
     const { accountName, accountTypeCode, openingDeposit, ownerTypeCode } = values;
-    let isValid = true;
 
-    isValid = validateAccountName(accountName);
-    isValid = validateOpeningDeposit(openingDeposit);
-    isValid = validateOwnerTypeCode(ownerTypeCode);
-    isValid = validateAccountTypeCode(accountTypeCode);
-
-    return isValid;
+    return (validateAccountName(accountName) && 
+        validateOpeningDeposit(openingDeposit) && 
+        validateOwnerTypeCode(ownerTypeCode) && 
+        validateAccountTypeCode(accountTypeCode));
 }

@@ -22,7 +22,7 @@ const Login = () => {
         ev.preventDefault();
 
         const form = ev.currentTarget;
-        if (form.checkValidity() === false) {
+        if (!form.checkValidity()) {
             ev.stopPropagation();
         } 
         setValidated(true);

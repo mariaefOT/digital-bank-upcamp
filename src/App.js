@@ -1,8 +1,9 @@
 import Home from './pages/Home';
-import ViewChecking from './pages/ViewChecking';
-import CreateChecking from './pages/CreateChecking';
-import LoginPage from './pages/LoginPage';
+import CheckingView from './pages/CheckingView';
+import CreateCheckingView from './pages/CreateCheckingView';
+import LoginView from './pages/LoginView';
 import NavbarLayout from './components/NavbarLayout';
+import SignUpView from './pages/SignUpView';
 import 'bootstrap/dist/css/bootstrap.min.css' ;
 import './CSS/App.css';
 import {
@@ -21,10 +22,11 @@ const App = () => {
             <Routes>
               <Route element={<NavbarLayout/>}>
                 <Route path="/home" element={<Home />}/>
-                <Route path="/viewChecking" element={<ViewChecking />}/>
-                <Route path="/createChecking" element={<CreateChecking />}/>
+                <Route path="/viewChecking" element={<CheckingView />}/>
+                <Route path="/createChecking" element={<CreateCheckingView />}/>
               </Route>
-              <Route path="/" element={<LoginPage />}/>
+              <Route path="/" element={<LoginView />}/>
+              <Route path="/user/register" element={<SignUpView />}/>
             </Routes>
           </header>
         </Router>

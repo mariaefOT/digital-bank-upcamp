@@ -55,3 +55,19 @@ export const createAccount = (data) =>
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     }
   });
+
+  export const createNewUser = (newUser) =>
+  axiosClient.post('user', newUser ,{
+    headers: { 
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      'Content-Type': 'application/json',
+    }
+  });
+
+  export const addApiRole = (id) =>
+  axiosClient.put(`user/${id}/role?role=API`,{},{
+      headers: { 
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      }
+    }
+  );

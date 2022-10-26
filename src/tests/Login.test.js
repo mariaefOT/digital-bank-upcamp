@@ -40,8 +40,8 @@ describe('Login tests', () => {
         const usernameInput = screen.getByRole('textbox', {name: /user name/i });
         user.type(usernameInput, 'jsmith@demo.io');
 
-        const password = screen.getByLabelText(/password/i);
-        user.type(password, 'Demo123!');
+        const passwordInput = screen.getByLabelText(/password/i);
+        user.type(passwordInput, 'Demo123!');
 
         user.click(screen.getByRole('button', {name: /SIGN IN/i }));
 
