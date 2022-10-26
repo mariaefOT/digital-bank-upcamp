@@ -30,7 +30,7 @@ describe('FormCreateChecking tests', () => {
         expect(view).toBeDefined();
     });
 
-    it('Should submit the form when all fields are valid...', () => {
+    it('Should submit the form when all fields are valid', () => {
         const titleDropdown = screen.getByRole('combobox', {name: /title/i });
         user.selectOptions(titleDropdown, within(titleDropdown).getByRole('option', {name: 'Mr.'}));
         

@@ -14,7 +14,7 @@ const LoginView = () => {
                 </h1> 
                 <Login/>
                 <div>
-                    Have an account?
+                    Don't have an account?
                     <Link to="/user/register">
                         <p>Sign Up Here</p>
                     </Link>

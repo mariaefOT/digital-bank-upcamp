@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { createNewUser, addApiRole } from "../api/index";
 import { userRegistrationData } from "../data/userRegistrationData";
 import { validateUserRegistration } from "../validations/validateUserRegistration";
-import { credentialsAdmin } from "../data/credentials";
+import { adminCredentials } from "../data/credentials";
 import { login } from "../api/login";
 import "../CSS/UserRegistration.css";
 
@@ -19,7 +19,7 @@ const SignUpForm = () => {
     const [values, setValues] = useState(userRegistrationData);
 
     useEffect(() => {
-        login(credentialsAdmin);
+        login(adminCredentials);
     },[]);
 
     const handleChange = (ev) => {
