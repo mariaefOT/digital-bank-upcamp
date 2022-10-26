@@ -4,7 +4,7 @@ const DepositsView = () => {
     return(
         <div>
             <h1 className="Title" >Deposits</h1>
-            <Transaction type={'deposit'}/>
+            <Transaction type={'DPT'}/>
         </div>
     )
 }

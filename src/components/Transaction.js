@@ -1,10 +1,12 @@
 import { Form, Button, Alert } from 'react-bootstrap';
 import { validateTransaction } from '../validations/validateTransaction';
+import { useNavigate } from 'react-router-dom';
 import { makeTransaction, getAccounts } from '../api';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
 const Transaction = (props) => {
+    let navigate = useNavigate();
     const [alert, setAlert] = useState(false);
     const [validated, setValidated] = useState(false);
     const [accounts,setAccounts] = useState([]); 
@@ -45,13 +47,15 @@ const Transaction = (props) => {
             setAlert(true);
         } else {
             setAlert(false);
-            //ToDo
+            makeTransaction(props.type,values.amount,props.type,values.account).then(() => {
+                navigate('/viewChecking');
+            });
         };
     };
 
     return(
         <div>
-            <h3 className='form-title'>{props.type === 'deposit' ? 'Deposit into Account': 'Withdraw from Account'}</h3>
+            <h3 className='form-title'>{props.type === 'DPT' ? 'Deposit into Account': 'Withdraw from Account'}</h3>
             <div className='form-div'>
                 <Form noValidate validated={validated} onSubmit={(ev) => handleSubmit(ev)} className='form'>
                         <Form.Group className="mb-3" controlId="formAccount">
@@ -69,7 +73,7 @@ const Transaction = (props) => {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formAmount">
-                            <Form.Label><b>{props.type === 'deposit' ? 'Deposit': 'Withdraw'} Amount</b></Form.Label>
+                            <Form.Label><b>{props.type === 'DPT' ? 'Deposit': 'Withdraw'} Amount</b></Form.Label>
                             <Form.Control
                                 required 
                                 type="number" 
