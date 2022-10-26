@@ -10,7 +10,7 @@ const NavigationBar = () => {
     return (
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand as={Link} to="/"><Logo /></Navbar.Brand>
+            <Navbar.Brand as={Link} to="/home"><Logo /></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
@@ -18,6 +18,10 @@ const NavigationBar = () => {
                 <NavDropdown title="Checking" id="basic-nav-dropdown">
                   <NavDropdown.Item as={Link} to="/viewChecking">Checking Accounts</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/createChecking">Create Checking Accounts</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="Transactions" id="basic-nav-dropdown">
+                  <NavDropdown.Item as={Link} to="/deposits">Deposit</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/withdrawals">Withdraw</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
