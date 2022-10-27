@@ -41,7 +41,6 @@ const Transaction = (props) => {
             ev.stopPropagation();
         } 
         setValidated(true);
-        console.log(values);
 
         if(!validateTransaction(values)){
             setAlert(true);
