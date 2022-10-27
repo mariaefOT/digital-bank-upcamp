@@ -5,7 +5,7 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import user from '@testing-library/user-event'
 import UserRegistration from '../components/SignUpForm';
 
-describe('FormCreateChecking tests', () => {
+describe('SignUpForm tests', () => {
     const onSubmit = jest.fn();
     const nextBtn = jest.fn();
     const previousBtn = jest.fn();

@@ -71,3 +71,15 @@ export const createAccount = (data) =>
       }
     }
   );
+
+  export const makeTransaction = (type,amount,description,id) =>
+    axiosClient.post(`account/${id}/transaction`,{
+      amount,
+      transactionTypeCode:type,
+      description
+    },{
+      headers:{
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      }
+    }
+  );

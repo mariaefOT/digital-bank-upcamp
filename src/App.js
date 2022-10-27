@@ -4,6 +4,8 @@ import CreateCheckingView from './pages/CreateCheckingView';
 import LoginView from './pages/LoginView';
 import NavbarLayout from './components/NavbarLayout';
 import SignUpView from './pages/SignUpView';
+import WithdrawalsView from './pages/WithdrawalsView';
+import DepositsView from './pages/DepositsView';
 import 'bootstrap/dist/css/bootstrap.min.css' ;
 import './CSS/App.css';
 import {
@@ -13,6 +15,7 @@ import {
   Link,
   Routes
 } from "react-router-dom";
+
 
 const App = () => {
   return (
@@ -24,6 +27,8 @@ const App = () => {
                 <Route path="/home" element={<Home />}/>
                 <Route path="/viewChecking" element={<CheckingView />}/>
                 <Route path="/createChecking" element={<CreateCheckingView />}/>
+                <Route path="/deposits" element={<DepositsView />}/>
+                <Route path="/withdrawals" element={<WithdrawalsView />}/>
               </Route>
               <Route path="/" element={<LoginView />}/>
               <Route path="/user/register" element={<SignUpView />}/>
